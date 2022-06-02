@@ -1,25 +1,127 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import React from 'react'
+import { useRecoilState } from 'recoil'
+import { historyState as historyAtom, stepNumberState as stepNumberAtom, xIsNextState as xIsNextAtom } from './Atom'
 
-function App() {
+function Square(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  )
 }
 
-export default App;
+function Board(props) {
+  const renderSquare = (i) => {
+    return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />
+  }
+
+  return (
+    <div>
+      <div className="board-row">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
+      </div>
+      <div className="board-row">
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
+      </div>
+      <div className="board-row">
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
+      </div>
+    </div>
+  )
+}
+
+function Game() {
+  const [history, SetHistory] = useRecoilState(historyAtom)
+  const [stepNumber, SetStepNumber] = useRecoilState(stepNumberAtom)
+  const [xIsNext, SetxIsNext] = useRecoilState(xIsNextAtom)
+
+  function handleClick(i) {
+    const histories = history.slice(0, stepNumber + 1)
+    const current = histories[histories.length - 1]
+    const squares = current.squares.slice()
+    if (calculateWinner(squares) || squares[i]) {
+      return
+    }
+    squares[i] = xIsNext ? 'X' : 'O'
+    SetHistory(
+      histories.concat([
+        {
+          squares: squares,
+        },
+      ]),
+    )
+    SetStepNumber(history.length)
+    SetxIsNext(!xIsNext)
+  }
+
+  const jumpTo = (step) => {
+    SetStepNumber(step)
+    SetxIsNext(step % 2 === 0)
+  }
+
+  // const historys = history.slice(0, stepNumber + 1)
+  const current = history[stepNumber]
+  // const current = { square: [null, null, null, null, null, null, null, null, null] }
+  const winner = calculateWinner(current.squares)
+  console.log(winner)
+
+  const moves = history?.map((step, move) => {
+    console.log('step', step)
+    const desc = move ? 'Go to move #' + move : 'Go to game start'
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{desc}</button>
+      </li>
+    )
+  })
+
+  let status
+  if (winner) {
+    status = 'Winner: ' + winner
+  } else {
+    status = 'Next player: ' + (xIsNext ? 'X' : 'O')
+  }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board squares={current.squares} onClick={(i) => handleClick(i)} />
+      </div>
+      <div className="game-info">
+        <div>{status}</div>
+        <ol>{moves}</ol>
+      </div>
+    </div>
+  )
+}
+
+// ========================================
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ]
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i]
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a]
+    }
+  }
+  return null
+}
+
+export default Game
