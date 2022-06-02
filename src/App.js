@@ -2,13 +2,10 @@ import './App.css'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { historyState as historyAtom, stepNumberState as stepNumberAtom, xIsNextState as xIsNextAtom } from './Atom'
+import { SquareStyled, BoardRow, GameBox, GameInfo } from './App-styled'
 
 function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  )
+  return <SquareStyled onClick={props.onClick}>{props.value}</SquareStyled>
 }
 
 function Board(props) {
@@ -18,21 +15,21 @@ function Board(props) {
 
   return (
     <div>
-      <div className="board-row">
+      <BoardRow>
         {renderSquare(0)}
         {renderSquare(1)}
         {renderSquare(2)}
-      </div>
-      <div className="board-row">
+      </BoardRow>
+      <BoardRow>
         {renderSquare(3)}
         {renderSquare(4)}
         {renderSquare(5)}
-      </div>
-      <div className="board-row">
+      </BoardRow>
+      <BoardRow>
         {renderSquare(6)}
         {renderSquare(7)}
         {renderSquare(8)}
-      </div>
+      </BoardRow>
     </div>
   )
 }
@@ -57,7 +54,7 @@ function Game() {
         },
       ]),
     )
-    SetStepNumber(history.length)
+    SetStepNumber(histories.length)
     SetxIsNext(!xIsNext)
   }
 
@@ -66,14 +63,10 @@ function Game() {
     SetxIsNext(step % 2 === 0)
   }
 
-  // const historys = history.slice(0, stepNumber + 1)
   const current = history[stepNumber]
-  // const current = { square: [null, null, null, null, null, null, null, null, null] }
   const winner = calculateWinner(current.squares)
-  console.log(winner)
 
-  const moves = history?.map((step, move) => {
-    console.log('step', step)
+  const moves = history.map((step, move) => {
     const desc = move ? 'Go to move #' + move : 'Go to game start'
     return (
       <li key={move}>
@@ -90,15 +83,15 @@ function Game() {
   }
 
   return (
-    <div className="game">
+    <GameBox>
       <div className="game-board">
         <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       </div>
-      <div className="game-info">
+      <GameInfo>
         <div>{status}</div>
         <ol>{moves}</ol>
-      </div>
-    </div>
+      </GameInfo>
+    </GameBox>
   )
 }
 
