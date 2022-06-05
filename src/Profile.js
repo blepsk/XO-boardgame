@@ -5,7 +5,7 @@ import { Button } from './App-styled'
 
 const Profile = () => {
   const [data, setData] = useState([])
-  const access_token = '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'
+  const access_token = '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'
 
   useEffect(() => {
     axios
