@@ -8,7 +8,7 @@ import {
   rankBoardState as rankBoardAtom,
   winNameState as winNameAtom,
 } from './Atom'
-import { SquareStyled, BoardRow, GameBox, GameInfo, Redo } from './App-styled'
+import { SquareStyled, BoardRow, GameBox, GameInfo, Button } from './App-styled'
 
 function Square(props) {
   return <SquareStyled onClick={props.onClick}>{props.value}</SquareStyled>
@@ -78,7 +78,7 @@ function Game() {
     const desc = move ? 'Go to move #' + move : 'Go to game start'
     return (
       <li key={move}>
-        <Redo onClick={() => jumpTo(move)}>{desc}</Redo>
+        <Button onClick={() => jumpTo(move)}>{desc}</Button>
       </li>
     )
   })

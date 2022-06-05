@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const SquareStyled = styled.button`
   background: #293462;
@@ -33,7 +33,7 @@ export const GameBox = styled.div`
 export const GameInfo = styled.div`
   margin-left: 20px;
 `
-export const Redo = styled.button`
+export const Button = styled.button`
   background-color: white;
   color: #f24c4c;
   font-size: 15px;
@@ -46,4 +46,16 @@ export const Redo = styled.button`
     color: #f24c4c;
     cursor: pointer;
   }
+  ${(props) =>
+    props.primary &&
+    css`
+      background: #ec9b3b;
+      border: 3px solid #f24c4c;
+      color: black;
+      &:hover {
+        background-color: #f24c4c;
+        color: #f24c4c;
+        cursor: pointer;
+      }
+    `}
 `

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { Button } from './App-styled'
 
 const Profile = () => {
   const [data, setData] = useState([])
@@ -30,6 +32,9 @@ const Profile = () => {
       <h3>{data.location}</h3>
       <h3>Email : {data.email}</h3>
       <h3>Github Profile : {data.html_url}</h3>
+      <Button primary>
+        <Link to="/Game">XO board game</Link>
+      </Button>
     </div>
   )
 }
