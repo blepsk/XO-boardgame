@@ -5,7 +5,7 @@ import { Button } from './App-styled'
 
 const Profile = () => {
   const [data, setData] = useState([])
-  const access_token = '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'
+  const access_token = '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'
 
   useEffect(() => {
     axios
@@ -20,8 +20,6 @@ const Profile = () => {
       .catch((error) => console.log(error))
   }, [])
   console.log(data)
-
-  //   const listItems = data && data.map((item) => <li>{item.login}</li>)
 
   return (
     <div className="card">
