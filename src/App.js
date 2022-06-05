@@ -88,13 +88,13 @@ function Game() {
   })
 
   let status
-  let text = 'User cancelled the prompt.'
+
   if (winner) {
     status = 'Winner: ' + winner
     let person = prompt('You are winner, Please enter your name:')
-    console.log('log ~ Game ~ person', person)
+
     if (!person) {
-      return text
+      SetStepNumber(0)
     } else {
       SetWinName(person)
       // if (winName === rankBoard.Name) {
