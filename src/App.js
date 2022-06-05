@@ -144,14 +144,6 @@ function Game() {
           ))}
         </table>
       </div>
-
-      {/* member.map((i) =>
-      {
-        <div>
-          {member.Name}
-          {member.Score}
-        </div>
-      } */}
     </GameBox>
   )
 }
