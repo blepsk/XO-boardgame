@@ -9,6 +9,7 @@ import {
   winNameState as winNameAtom,
 } from './Atom'
 import { SquareStyled, BoardRow, GameBox, GameInfo, Button } from './App-styled'
+import { Link } from 'react-router-dom'
 
 function Square(props) {
   return <SquareStyled onClick={props.onClick}>{props.value}</SquareStyled>
@@ -36,6 +37,9 @@ function Board(props) {
         {renderSquare(7)}
         {renderSquare(8)}
       </BoardRow>
+      <Button primary>
+        <Link to="/Profile">Go back to Profile</Link>
+      </Button>
     </div>
   )
 }

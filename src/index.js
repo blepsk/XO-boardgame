@@ -13,7 +13,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Profile />} />
-          <Route path="game" element={<Game />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
