@@ -10,27 +10,40 @@ ul {
 
 .status {
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
+.card {
+  align-items: center;
+  margin: 30px;
+  padding: 20px;
+  background-color: #293462;
+  width: 400px;
+  height: auto;
+  color: #ec9b3b;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.avatar {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
   text-align: center;
-  width: 34px;
 }
 
-.square:focus {
-  outline: none;
+.table {
+  font-size: 20px;
+  margin-left: 20px;
 }
-
-.kbd-navigation .square:focus {
-  background: #ddd;
+.scoreboad {
+  font-weight: bold;
+}
+.tablehead {
+  font-size: 16px;
+  margin: 10px;
 }

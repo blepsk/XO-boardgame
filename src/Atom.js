@@ -18,3 +18,13 @@ export const xIsNextState = atom({
   key: 'xIsNext',
   default: true,
 })
+
+export const rankBoardState = atom({
+  key: 'rankBoard',
+  default: [],
+})
+
+export const winNameState = atom({
+  key: 'winName',
+  default: '',
+})
