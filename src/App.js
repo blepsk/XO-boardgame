@@ -8,7 +8,7 @@ import {
   rankBoardState as rankBoardAtom,
   winNameState as winNameAtom,
 } from './Atom'
-import { SquareStyled, BoardRow, GameBox, GameInfo, Button } from './App-styled'
+import { SquareStyled, BoardRow, GameBox, GameInfo, Button, Input } from './App-styled'
 import { Link } from 'react-router-dom'
 
 function Square(props) {
@@ -123,40 +123,11 @@ function Game() {
     ])
   }
 
-  // function ButtonIfDraw() {
-  //   if (!winner && (stepNumber = 9)) {
-  //     return <Button onClick={reset}>Reset the Game</Button>
-  //   }
-  // }
-
   let status
 
   if (winner) {
     status = 'Winner: ' + winner
-
-    // let person = prompt('You are winner, Please enter your name:')
-
-    // if (!person) {
-    //   SetStepNumber(0)
-    // } else {
-    //   SetWinName(person)
-    // const existMemberIdx = rankBoard.findIndex((board) => board.Name === person)
-    // let newRankBoard = []
-
-    // if (existMemberIdx !== -1) {
-    //   const member = rankBoard[existMemberIdx]
-    //   newRankBoard = replaceItemAtIndex(rankBoard, existMemberIdx, { ...member, Score: member.Score + 1 })
-    // } else {
-    //   const member = { Name: person, Score: 1 }
-    //   newRankBoard = [...rankBoard, member]
-    // }
-
-    // newRankBoard = newRankBoard.sort((a, b) => b.Score - a.Score)
-
-    // SetRankBoard(newRankBoard)
-    // SetStepNumber(0)
-    // }
-  } else {
+  } else if (!winner && stepNumber < 9) {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O')
   }
   console.log(winName)
@@ -166,21 +137,27 @@ function Game() {
       <div className="game-board">
         <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       </div>
-      {/* {!winner && (stepNumber = 9) && <Button onClick={reset}>Reset the Game</Button>} */}
-
+      {!winner && stepNumber === 9 && (
+        <Button reset onClick={reset}>
+          Reset the Game
+        </Button>
+      )}
       <GameInfo>
-        <div className="status">{status}</div>
+        <div className="status">
+          {status}
+          {!winner && stepNumber === 9 && <div className="status">Draw</div>}
+        </div>
         {winner && (
           <div>
             <Button reset onClick={reset}>
               Reset the Game
             </Button>
-            <input value={winName} onChange={onChangeWinName} />
-            <button onClick={handleSubmit}>Submit</button>
+            <Input value={winName} onChange={onChangeWinName} />
+            <Button onClick={handleSubmit}>Submit</Button>
           </div>
         )}
 
-        <ol>{!winner && moves}</ol>
+        <ol>{!winner && stepNumber < 9 && moves}</ol>
       </GameInfo>
       <div className="table">
         <div className="scoreboad">Score Board</div>

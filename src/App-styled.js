@@ -67,3 +67,10 @@ export const Button = styled.button`
       margin: 15px;
     `}
 `
+export const Input = styled.input`
+  height: 25px;
+  width: 250px;
+  border-color: rgba(185, 185, 185, 0.301);
+  border-radius: 7px;
+  margin: 5px;
+`
