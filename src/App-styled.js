@@ -19,6 +19,7 @@ export const SquareStyled = styled.button`
   }
 `
 export const BoardRow = styled.div`
+  display: flex;
   :after {
     clear: both;
     content: '';
@@ -27,6 +28,7 @@ export const BoardRow = styled.div`
 `
 export const GameBox = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
 `
 
@@ -52,10 +54,16 @@ export const Button = styled.button`
       background: #ec9b3b;
       border: 3px solid #f24c4c;
       color: black;
+      margin: 15px;
       &:hover {
         background-color: #f24c4c;
         color: #f24c4c;
         cursor: pointer;
       }
+    `}
+  ${(props) =>
+    props.reset &&
+    css`
+      margin: 15px;
     `}
 `
